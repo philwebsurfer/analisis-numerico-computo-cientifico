@@ -1,0 +1,56 @@
+---
+title: "Entregable 1"
+author: "Equipo 9"
+date: "23 de enero de 2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+_Jorge III Altamirano Astorga - 175904_
+
+_Eduardo Selim Martínez Mayorga - 175921_
+
+_Ariel Ernesto Vallarino Maritorena - 175875_
+
+## Tabla de Operaciones 
+
+Ejercicios realizados durante la clase del 2019-01-23.
+
+| Operación | Valor a 8 dígitos | Aritmética de máquina | ErrA | ErrR |
+|------|----|-----|------|-----|
+|x+y|1.0476000|1.0476000|1.90E-05|1.81E-05|
+|xy | 2.3809524 | 2.3809000 | 5.24E-5 | 2.20E-05 |
+|x-u| 0.0000347 | 0.000003 |  4.71E-6 | 1.36E-1 |
+|(x-u)*v | 3.4285877 | 2.9629000 | 4.65E-1 | 1.3E-1 |
+
+## Integración Numérica
+
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+
+```{r}
+exponente <- (-1)*(1:16)
+h <- 10^exponente 
+h
+```
+
+
+```{r}
+aprox <- (cos(2+h)-cos(2-h))/(2*h)
+aprox
+```
+
+```{r}
+error <- (aprox + sin(2))/(-sin(2))
+error <- abs(error)
+error
+```
+
+```{r}
+plot(log(h),log(error))
+```
+
