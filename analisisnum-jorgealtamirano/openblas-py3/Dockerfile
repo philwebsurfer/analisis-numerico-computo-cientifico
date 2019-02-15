@@ -21,7 +21,8 @@ RUN cd /tmp \
 	&& pip3 install .
 
 #install benchmark
-RUN cd /tmp \
-	&& curl -o bench.py 'https://raw.githubusercontent.com/philwebsurfer/analisis-numerico-computo-cientifico/master/analisisnum-jorgealtamirano/openblas-py3/bench.py'  \
+COPY bench.py /root
+RUN cd /root \
+	&& ldconfig \
 	&& python3 bench.py
 
