@@ -49,6 +49,8 @@ Para información sobre el curso de Métodos Numéricos y Optimización impartid
 
 * [Preguntas 1.3](https://www.dropbox.com/s/zbf78u0uxr31ei0/preguntas_condicion_estabilidad_normas.txt?dl=0)
 
+* [Ejercicios de normas y condición](https://www.dropbox.com/s/78rryxn3i58bg6c/Normas_condicion.pdf?dl=0)
+
 ## II [Cómputo en paralelo](https://www.dropbox.com/sh/vrdgj7bugi1flyp/AAAMP6R2n5GZY71KXkWT4ZEja?dl=0):
 =======
 [Tutorial para activar créditos de Amazon Web Services](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/0.Activar-creditos-de-AWS)
@@ -111,7 +113,11 @@ Revisamos notas:
 
 3.1.1 [Multiplicación de matrices y estructura de datos.](https://www.dropbox.com/s/fyqwiqasqaa3wlt/3.1.1.Multiplicacion_de_matrices_y_estructura_de_datos.pdf?dl=0)
 
+* [Preguntas 3.1.1](https://www.dropbox.com/s/s72yem79ef10k9h/preguntas_multiplicacion_matrices_y_estructura_de_datos.txt?dl=0)
+
 3.1.2 [Localidad y vectorización. Análisis del error en cómputos matriciales básicos.](https://www.dropbox.com/s/l4hq45rj860ql9f/3.1.2.Localidad_y_vectorizacion.Analisis_del_error_en_computos_matriciales_basicos.pdf?dl=0)
+
+* [Preguntas 3.1.2](https://www.dropbox.com/s/zbjd153jhhhc8os/preguntas_localidad_y_vectorizacion_analisis_del_error.txt?dl=0)
 
 3.2.1 [Sistemas de ecuaciones lineales: eliminación Gaussiana y factorización LU.](https://www.dropbox.com/s/jwu8lu4r14pb7ut/3.2.1.Sistemas_de_ecuaciones_lineales_eliminacion_Gaussiana_y_factorizacion_LU.pdf?dl=0)
 
@@ -167,7 +173,9 @@ Ejemplos de Uso:
 
 AWS.0 [Tutorial para activar créditos de Amazon Web Services](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/0.Activar-creditos-de-AWS)
 
-AWS.1 [Configuración de servicios básicos de AWS](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/1.Configuracion-de-servicios-basicos-para-uso-de-AWS) 
+AWS.1.1 [Configuración de servicios básicos de AWS](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/1.1.Configuracion-de-servicios-basicos-para-uso-de-AWS) 
+
+AWS.1.2 [Instalación de herramientas útiles en AWS](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/1.2.Instalaci%C3%B3n-de-herramientas-%C3%BAtiles-en-AWS)
 
 AWS.2 [AWS y OpenMPI](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/2.AWS-y-OpenMPI)
 
@@ -175,7 +183,7 @@ AWS.3 [AWS y Sun Grid Engine](https://github.com/ITAM-DS/analisis-numerico-compu
 
 AWS.4 [AWS y Kubernetes](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/4.AWS-y-Kubernetes)
 
-AWS.5 [Instalación de herramientas útiles en AWS](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/5.Instalaci%C3%B3n-de-herramientas-%C3%BAtiles-en-AWS)
+
 
 AWS.adicional1 [AWS: Relational Database System]
 
