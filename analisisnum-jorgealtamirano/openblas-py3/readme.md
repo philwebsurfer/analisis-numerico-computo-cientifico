@@ -6,9 +6,9 @@ Este Docker compila las librerías y ejecuta un benchmark de matrices y vectores
 
 `docker build -t docker.io/philwebsurfer/openblas-py3:16.04 .`
 
-## Ejecución del contenedor
+Nota: no es necesario reconstruirlo, pues está disponible en [Docker Hub: ATLAS](https://hub.docker.com/r/philwebsurfer/openblas-py3).
 
-Nota: he subido esta imagen de docker, por lo que si no se ha seguido el paso anterior, lo jala de Docker Hub.
+## Ejecución del contenedor
 
 `docker run -it docker.io/philwebsurfer/openblas-py3:16.04`
 
