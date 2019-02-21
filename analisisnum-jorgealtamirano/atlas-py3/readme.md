@@ -1,4 +1,4 @@
-# Docker con python3 + numpy *Sin* OpenBLAS
+# Docker con python3 + numpy + ATLAS
 
 Este Docker compila las librerías y ejecuta un benchmark de matrices y vectores en Python 3 numpy utilizando optimizaciones de ATLAS.
 
