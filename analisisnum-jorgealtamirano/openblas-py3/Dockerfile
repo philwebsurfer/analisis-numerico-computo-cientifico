@@ -18,7 +18,8 @@ RUN cd /tmp \
 	&& git clone https://github.com/numpy/numpy \
 	&& cd numpy \
 	&& python3 setup.py config \
-	&& pip3 install .
+	&& pip3 install . \
+	&& pip3 install pandas
 
 #install benchmark
 COPY bench.py /root
