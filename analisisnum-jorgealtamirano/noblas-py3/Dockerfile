@@ -4,11 +4,11 @@ FROM ubuntu:16.04
 
 RUN apt-get update \
 	&& apt-get upgrade -y \
-	&& apt-get install -y python3 python3-pip curl
+	&& apt-get install -y python3 python3-pip curl python3-pandas python3-numpy
 
 
 #instalar dependencias python3
-RUN pip3 install pandas numpy
+#RUN pip3 install pandas numpy
 
 #install benchmark
 COPY bench.py /root
