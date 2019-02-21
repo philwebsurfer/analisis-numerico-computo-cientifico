@@ -1,0 +1,31 @@
+BLAS,Tamaño,Operación,Iteraciones,Tiempo
+openblas,64,Producto Punto de Matrices,5,4.487037658691406e-05
+openblas,128,Producto Punto de Matrices,5,0.00010709762573242187
+openblas,256,Producto Punto de Matrices,5,0.000302886962890625
+openblas,512,Producto Punto de Matrices,5,0.0013625621795654297
+openblas,1024,Producto Punto de Matrices,5,0.006381607055664063
+openblas,2048,Producto Punto de Matrices,5,0.046780729293823244
+openblas,32768,Producto Punto de 2 Vectores,2500,1.748228073120117e-05
+openblas,65536,Producto Punto de 2 Vectores,2500,1.849031448364258e-05
+openblas,131072,Producto Punto de 2 Vectores,2500,1.867246627807617e-05
+openblas,262144,Producto Punto de 2 Vectores,2500,2.158651351928711e-05
+openblas,524288,Producto Punto de 2 Vectores,2500,2.4288845062255858e-05
+openblas,1048576,Producto Punto de 2 Vectores,2500,6.012544631958008e-05
+openblas,64,SVD,5,0.00048980712890625
+openblas,128,SVD,5,0.001729583740234375
+openblas,256,SVD,5,0.012052011489868165
+openblas,512,SVD,5,0.03404941558837891
+openblas,1024,SVD,5,0.1263519287109375
+openblas,2048,SVD,5,0.5286614418029785
+openblas,32.0,Cholesky,5,3.01361083984375e-05
+openblas,64.0,Cholesky,5,9.303092956542968e-05
+openblas,128.0,Cholesky,5,0.0002972602844238281
+openblas,256.0,Cholesky,5,0.0009115219116210937
+openblas,512.0,Cholesky,5,0.004429244995117187
+openblas,1024.0,Cholesky,5,0.020945262908935548
+openblas,32.0,Eigen,5,0.0005102157592773438
+openblas,64.0,Eigen,5,0.002375507354736328
+openblas,128.0,Eigen,5,0.01955108642578125
+openblas,256.0,Eigen,5,0.07583055496215821
+openblas,512.0,Eigen,5,0.3563870429992676
+openblas,1024.0,Eigen,5,1.172560977935791

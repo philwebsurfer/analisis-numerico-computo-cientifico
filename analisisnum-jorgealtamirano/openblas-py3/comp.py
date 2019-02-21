@@ -95,6 +95,6 @@ for i in range(6, 12):
        'Tiempo': delta/N}, 
       ignore_index=True)
     del G
-filename = "/tmp/compare.%s.csv"%(np.__config__.blas_opt_info['libraries'][0])
+filename = "compare.%s.csv"%(np.__config__.blas_opt_info['libraries'][0])
 print("Guardando archivo en " + filename)
 df.to_csv(filename, encoding="utf-8", index=False)
