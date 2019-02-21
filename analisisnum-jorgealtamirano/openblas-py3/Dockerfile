@@ -23,7 +23,12 @@ RUN cd /tmp \
 
 #install benchmark
 COPY bench.py /root
+COPY comp.py /root
 RUN cd /root \
 	&& ldconfig \
+	&& python3 comp.py \
+	&& cat compare.*.csv \
+	&& echo ========================================================================== \
+	&& echo ========================================================================== \
 	&& python3 bench.py
 
