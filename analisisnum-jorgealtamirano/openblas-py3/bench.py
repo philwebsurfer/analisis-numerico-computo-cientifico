@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
+# @author: Jorge Altamirano, Ariel Vallarino, Eduardo Martínez 2019
+# @description: Ejecuta pruebas de benchmarking en punto flotante, basado en numpy con fines comparativos.
 
 # Basado en http://stackoverflow.com/questions/11443302/compiling-numpy-with-openblas-integration
 
