@@ -109,6 +109,8 @@ Revisamos notas:
 
 * [Ejemplos](C/extensiones_a_C/CUDA/ejemplos/)
 
+* [PyCUDA](Python/PyCUDA/)
+
 ## III [Cómputo matricial](https://www.dropbox.com/sh/azwz5p69bnbamtw/AAB5t2SafFK_1XvthNT9Tflda?dl=0)
 
 3.1.1 [Multiplicación de matrices y estructura de datos.](https://www.dropbox.com/s/fyqwiqasqaa3wlt/3.1.1.Multiplicacion_de_matrices_y_estructura_de_datos.pdf?dl=0)
@@ -174,6 +176,18 @@ Revisamos notas:
 4.5.4 [Algoritmos de optimización con restricciones de igualdad y desigualdad](https://drive.google.com/file/d/1RMwUXEN_SOHKue-J9Cx3Ldvj9bejLjiM/view?usp=sharing)
 
 * [Ejemplo de optimización, aprendizaje automático y cómputo en paralelo.](https://www.dropbox.com/s/qf416dacvh0nvq6/MSV_RL_tesis_maestria_Erick.pdf?dl=0)
+
+## Implementaciones de algoritmos para ecuaciones no lineales y optimización convexa
+
+[Ecuaciones no lineales](algoritmos/ecuaciones_no_lineales/)
+
+[Algoritmos para optimización sin restricciones](algoritmos/optimizacion_convexa_sin_restricciones)
+
+[Algoritmos para optimización con restricciones de igualdad: ecuaciones lineales](algoritmos/optimizacion_convexa_con_restricciones_de_igualdad_ecuaciones_lineales)
+
+
+
+
 
 ## V Cómputo en la nube
 
