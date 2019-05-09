@@ -1,40 +1,25 @@
-# Métodos Numéricos y Optimización
+# analisis-numerico-computo-cientifico
 
-<<<<<<< HEAD
 En la carpeta [C](C) encuentran:
-=======
-[Temario](https://www.dropbox.com/s/krs3d8xec09dkqv/TEMARIO_MNO.pdf?dl=0)
 
-[El curso, calificación y entregas, correo al cual escribir](https://www.dropbox.com/s/pgvmia2ltahlktf/Curso_MNO_2019.pdf?dl=0)
->>>>>>> 7c758587e5fe62f07e780f6d69ee9676c7a0fa48
+* Clases para introducción al lenguaje C de programación.
 
-[Equipos de MNO]()
+* Dentro de [C/BLAS](C/BLAS) y [C/LAPACK](C/LAPACK) se tienen funciones para ejecución de algunas rutinas de [BLAS](http://www.netlib.org/blas/), [LAPACK](http://www.netlib.org/lapack/) en un sistema ubuntu.
 
-[Lista alumn@s con calificaciones](https://www.dropbox.com/s/9t03f6drg23oru3/salon_pf_102.xlsx?dl=0)
+* Dentro de [C/extensiones_a_C/](C/extensiones_a_C) se encuentran las siguientes extensiones al lenguaje de programación C: [MPI](http://mpi-forum.org/), [Pthreads](https://computing.llnl.gov/tutorials/pthreads/), [openMP](http://www.openmp.org/), [CUDA](https://docs.nvidia.com/cuda/cuda-c-programming-guide/). 
 
-[Objetivo, descripción, lista de ejemplos para proyecto final](proyecto_final)
-
-<<<<<<< HEAD
 Para información sobre el curso de Métodos Numéricos y Optimización impartido en ITAM, ir a la rama correspondiente de este repositorio y seleccionar la fecha de interés. Dar click [aquí](https://www.dropbox.com/s/krs3d8xec09dkqv/TEMARIO_MNO.pdf?dl=0) para el temario.
 
 Índice de notas. Cada número contiene información del tema respectivo.
-=======
-[Indicaciones para proyecto final MNO](proyecto_final/indicaciones)
->>>>>>> 7c758587e5fe62f07e780f6d69ee9676c7a0fa48
 
-[Lista de proyectos finales MNO](proyecto_final/proyectos)
+## I [Cómputo científico](https://www.dropbox.com/sh/2o888m9v7i3ngsf/AACRxfa8bIl-LMBl7Jtb-y72a?dl=0):
 
-<<<<<<< HEAD
 1.1 [Analisis numérico y cómputo científico.](https://www.dropbox.com/s/z5ifw3ti66gukdy/1.1.Analisis_numerico_y_computo_cientifico.pdf?dl=0)
 
 * [Preguntas 1.1](https://www.dropbox.com/s/geg0wji899tuf89/preguntas_analisis_numerico_computo_cientifico.txt?dl=0)
-=======
-[Liga hacia clases de C](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/tree/master/C)
->>>>>>> 7c758587e5fe62f07e780f6d69ee9676c7a0fa48
 
-[Liga hacia índice del branch master](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/tree/master)
+1.2 [Sistema de punto flotante.](https://www.dropbox.com/s/9fsupm3bhwmv7cb/1.2.Sistema_de_punto_flotante.pdf?dl=0)
 
-<<<<<<< HEAD
 * [Preguntas 1.2](https://www.dropbox.com/s/rfqs34rpav2hjs3/preguntas_sistema_de_punto_flotante.txt?dl=0)
 
 * [Ejercicios punto flotante](https://www.dropbox.com/s/09o9aasjyzya4ff/Punto_flotante.pdf?dl=0)
@@ -52,15 +37,9 @@ Para información sobre el curso de Métodos Numéricos y Optimización impartid
 * [Ejercicios de normas y condición](https://www.dropbox.com/s/78rryxn3i58bg6c/Normas_condicion.pdf?dl=0)
 
 ## II [Cómputo en paralelo](https://www.dropbox.com/sh/vrdgj7bugi1flyp/AAAMP6R2n5GZY71KXkWT4ZEja?dl=0):
-=======
-[Tutorial para activar créditos de Amazon Web Services](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/0.Activar-creditos-de-AWS)
 
-## Clase 1
->>>>>>> 7c758587e5fe62f07e780f6d69ee9676c7a0fa48
+2.1 [Un poco de historia y generalidades](https://www.dropbox.com/s/z465znq3wwao9ad/2.1.Un_poco_de_historia_y_generalidades.pdf?dl=0).
 
-16 de enero
-
-<<<<<<< HEAD
 * [Preguntas 2.1](https://www.dropbox.com/s/lm0z67b7q5a7qqi/preguntas_generalidades_computo_paralelo.txt?dl=0)
 
 2.2 Sistemas de memoria distribuida: [MPI](C/extensiones_a_C/MPI).
@@ -68,15 +47,9 @@ Para información sobre el curso de Métodos Numéricos y Optimización impartid
 * [Preguntas 2.2](https://www.dropbox.com/s/l5x3tjaocj949e8/preguntas_mpi.txt?dl=0)
 
 * [Levantar un cluster de forma pseudo distribuida con openmpi y docker](C/extensiones_a_C/MPI/openMPI/)
-=======
-Introducción, forma de calificar, dinámica de clase, generalidades del curso.
 
-Revisamos notas: 
->>>>>>> 7c758587e5fe62f07e780f6d69ee9676c7a0fa48
+[Ejemplos con openmpi](C/extensiones_a_C/MPI/openMPI/ejemplos/):
 
-[I/1.1](https://www.dropbox.com/s/z5ifw3ti66gukdy/1.1.Analisis_numerico_y_computo_cientifico.pdf?dl=0)
-
-<<<<<<< HEAD
 * [send_receive_broadcast_reduce](C/extensiones_a_C/MPI/openMPI/ejemplos/1_send_receive_broadcast_reduce)
 
 * [io_scatter_gather](C/extensiones_a_C/MPI/openMPI/ejemplos/2_io_scatter_gather)
@@ -248,6 +221,3 @@ AWS.adicional1 [AWS: Relational Database System]
 [Ejemplos](C/LAPACK/ejemplos/):
 
 * [solve_linear_equations](C/LAPACK/ejemplos/solve_linear_equations/)
-=======
-[I/1.2](https://www.dropbox.com/s/9fsupm3bhwmv7cb/1.2.Sistema_de_punto_flotante.pdf?dl=0) hasta diagrama de representación de un SPF.
->>>>>>> 7c758587e5fe62f07e780f6d69ee9676c7a0fa48
