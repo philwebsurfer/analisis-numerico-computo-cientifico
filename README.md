@@ -137,7 +137,7 @@ Discusión de algoritmos para calcular la factorización LU en su versión outer
 
 Factorización LU con pivoteo parcial en su versión outer product y ejercicio de programación para versión gaxpy de nota [3.2.1.Sistemas de ecuaciones lineales: eliminación Gaussiana y factorización LU.](https://www.dropbox.com/s/jwu8lu4r14pb7ut/3.2.1.Sistemas_de_ecuaciones_lineales_eliminacion_Gaussiana_y_factorizacion_LU.pdf?dl=0) Inicio de nota [3.2.2 Factorizaciones matriciales: SVD, Cholesky, QR. (Vista rápida).](https://www.dropbox.com/s/s4ch0ww1687pl76/3.2.2.Factorizaciones_matriciales_SVD_Cholesky_QR.pdf?dl=0)
 
-[Soluciones a ejercicios de PLU con gaxpy](https://www.dropbox.com/sh/y4klvkql9960cz0/AACJNHY2SGASSoT8IPw7ElKja?dl=0)
+[Soluciones a ejercicios de LU con gaxpy](https://www.dropbox.com/sh/y4klvkql9960cz0/AACJNHY2SGASSoT8IPw7ElKja?dl=0)
 
 ## Clase 13
 
