@@ -82,6 +82,8 @@ Para información sobre el curso de Métodos Numéricos y Optimización impartid
 
 * [Ejemplos](C/extensiones_a_C/CUDA/ejemplos/)
 
+* [CUBLAS](C/extensiones_a_C/CUDA/CUBLAS/)
+
 * [PyCUDA](Python/PyCUDA/)
 
 ## III [Cómputo matricial](https://www.dropbox.com/sh/azwz5p69bnbamtw/AAB5t2SafFK_1XvthNT9Tflda?dl=0)
@@ -158,6 +160,7 @@ Para información sobre el curso de Métodos Numéricos y Optimización impartid
 
 [Algoritmos para optimización con restricciones de igualdad: ecuaciones lineales](algoritmos/optimizacion_convexa_con_restricciones_de_igualdad_ecuaciones_lineales)
 
+[Algoritmos para optimización con restricciones de igualdad: ecuaciones lineales y desigualdad](algoritmos/optimizacion_convexa_con_restricciones_de_igualdad_ecuaciones_lineales_y_desigualdad/)
 
 
 

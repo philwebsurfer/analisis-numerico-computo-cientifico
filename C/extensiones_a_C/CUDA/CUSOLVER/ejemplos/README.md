@@ -1,6 +1,10 @@
-Suponemos un sistema ubuntu y que está instalado `libblas-dev` y `liblapack-dev`.
+Suponemos un sistema ubuntu y que se instaló el toolkit de cuda (ver [aquí](/C/extensiones_a_C/CUDA/instalacion/
+) para su instalación).
 
-En las carpetas para los diferentes niveles de BLAS: [level1](level1/), [level2](level2/), [level3](level3/) se tienen códigos que utilizan los archivos `definiciones.h` y `funciones.c` siguiente y se basan en [C/extensiones_a_C/MPI/openMPI/ejemplos/3_openMPI_y_BLAS/README.md](/C/extensiones_a_C/MPI/openMPI/ejemplos/3_openMPI_y_BLAS/README.md):
+Se recomienda consultar primero [C/LAPACK](/C/LAPACK/).
+
+En la carpeta [solve_linear_equations](solve_linear_equations/) se tienen códigos que utilizan los archivos `definiciones.h` y `funciones.c` siguiente y se basan en [C/LAPACK/ejemplos](/C/LAPACK/ejemplos)
+
 
 * `definiciones.h`:
 
@@ -85,4 +89,3 @@ void imprime_vector(arreglo_1d_T p){
 				printf("vector[%d]=%.5f\n",i,entrada_vector(p,i));
 }
 ```
-
