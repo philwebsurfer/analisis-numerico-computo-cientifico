@@ -1,0 +1,95 @@
+---
+title: "Factorización LU"
+author: "Equipo 2: Iker, Luis, Soledad"
+date: "March 13th, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Ejercicio 1
+
+Outer Product LU
+```{r}
+set.seed(53637)
+A=matrix(sample(7,36, replace = TRUE),6,6)
+A
+```
+
+```{r}
+outer_product_LU <- function(A){
+  n <- length(A[,1])
+  for (k in 1 : (n-1)){
+    #i = k+1:n
+    A[(k+1):n,k] = A[(k+1):n,k] / A[k,k]
+    A[(k+1):n,(k+1):n] = A[(k+1):n,(k+1):n] - A[(k+1):n,k] %o% A[k,(k+1):n]
+  }
+  U <- Matrix::triu(A)
+  L <- diag(x=1,ncol = n,nrow = n) + Matrix::tril(A,-1)
+  list(L = L, U = U)
+}
+```
+
+```{r}
+Z <- outer_product_LU(A)
+Z
+```
+
+Comprobación
+
+```{r}
+Z$L %*% Z$U
+A
+```
+
+
+## Ejercicio 3 - Medición de tiempos 
+
+
+```{r}
+outer_product <- function(A,b){
+  n <- length(A[,1])
+  for (k in 1 : (n-1)){
+    #i = k+1:n
+    l_k = t(t(A[(k+1):n,k] / A[k,k]))
+    A[(k+1):n,(k+1):n] = A[(k+1):n,(k+1):n] - l_k %*% A[k,(k+1):n]
+    b[(k+1):n] = b[(k+1):n] - b[k] * l_k
+  }
+  A <- Matrix::triu(A)
+  solve(A,b)
+}
+```
+
+```{r}
+set.seed(63738)
+B_samples <- lapply(1:1000, function(x) matrix(sample(7,6, replace = TRUE),ncol = 1, nrow = 6))
+head(B_samples)
+```
+
+```{r}
+start_time <- Sys.time()
+for (m in 1:1000){
+  outer_product(A,B_samples[[m]])
+}
+end_time <- Sys.time()
+
+overall_time <- end_time - start_time
+overall_time
+```
+
+
+```{r}
+start_time <- Sys.time()
+LU <- outer_product_LU(A)
+for (m in 1:1000){
+  d <- solve(LU$L,B_samples[[m]])
+  solve(LU$U,d)}
+end_time <- Sys.time()
+
+overall_time <- end_time - start_time
+overall_time
+```
+

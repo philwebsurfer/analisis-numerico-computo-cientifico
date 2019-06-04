@@ -1,0 +1,120 @@
+---
+title: "MNO 2019"
+author: "Equipo 9"
+date: "13/2/2019"
+output: html_document
+---
+
+Ejercicios - Codición de una matriz:
+
+#### 1. Generar matrices con diferente número de condición y observar el efecto que tiene Cond(A) en la cota que involucra residual relativo y error relatvo al resolver el sistema Ax = b.
+
+```{r}
+library(matrixcalc)
+```
+
+Genero matrices:
+```{r}
+h3 <- hilbert.matrix(3) 
+h5 <- hilbert.matrix(5) 
+h10 <- hilbert.matrix(10) 
+h11 <- hilbert.matrix(11) 
+```
+
+Calculo en número de condición de cada una:
+```{r}
+(cond_h3 <- kappa(h3, exact = TRUE))
+(cond_h5 <- kappa(h5, exact = TRUE))
+(cond_h10 <- kappa(h10, exact = TRUE))
+(cond_h11 <- kappa(h11, exact = TRUE))
+```
+
+```{r}
+x3 <- 1:3
+x5 <- 1:5
+x10 <- 1:10
+x11 <- 1:11
+```
+
+
+```{r}
+(b3 <- h3%*%x3)
+(b5 <- h5%*%x5)
+(b10 <- h10%*%x10)
+(b11 <- h11%*%x11)
+```
+
+```{r}
+(x_res3 <- solve(h3,b3))
+(x_res5 <- solve(h5,b5))
+(x_res10 <- solve(h10,b10))
+(x_res11 <- solve(h11,b11))
+```
+
+> Se puede notar que para la matriz de Hilbert de dmensión 11, ya hubo variación en la respuesta.
+
+
+---  
+
+#### 2.a) Resolver el sistema $Ax = b$ con 
+
+
+A=  
+   1 -1 -1 ..... -1 -1  
+   0  1 -1 ......-1 -1  
+   0  0  1 ........ -1   
+   .  
+   .  
+   0  0  0  0..... 0 1   
+   
+b= -1
+   -1
+    .
+    .
+    -1
+    1
+    
+$b \in R^{20\times 1}$
+
+#### b) Perturbar $b(20)$ por 1.00001, resolver Ax=b modificada
+   
+   
+```{r}
+genera_mat <- function(inf, diag, sup, rows, cols){
+    mat <-diag(diag, rows, cols)
+    mat[upper.tri(mat)] <- sup
+    mat[lower.tri(mat)] <-inf  
+    return(mat)
+}
+
+A <- genera_mat(0,1,-1,20, 20)
+b <- c(rep(-1, 19),1)
+```
+
+```{r}
+x <- solve(A,b)
+```
+   
+```{r}
+b_mod <- b
+b_mod[20] <- 1.00001
+b_mod
+```
+   
+```{r}
+(x_mod <- solve(A,b_mod))
+```   
+   
+   
+```{r}
+kappa(A, exact = TRUE)
+```
+
+> Vemos que al perturbar muy poco $b(20)$ la solución cambió drásticamente.
+
+```{r}
+sqrt(sum((x - x_mod)^2))
+```
+   
+   
+   

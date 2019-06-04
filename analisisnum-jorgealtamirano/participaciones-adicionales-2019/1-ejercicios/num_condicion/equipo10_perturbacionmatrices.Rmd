@@ -1,0 +1,59 @@
+---
+title: "04_Ejercicios_clases5"
+author: "Francisco"
+date: "13 de febrero de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set
+library(Matrix)
+set.seed(549530)
+```
+
+#Equipo 10
+
+##Ejercicio1
+
+### Matriz con condición alta.
+```{r}
+A <- matrix(rnorm(9),3,3)
+cond <- kappa(A, exact=TRUE, norm='2' )
+b <- c(5,6,9)
+x <- qr.solve(A,b)
+Am<-A
+Am[col(Am) == row(Am)] <- c(0.6262801,0.1639296,-0.09631554)
+xhat <- qr.solve(Am,b)
+norm(A - Am,"2")/norm(A,"2")
+norm(A%*%xhat-b,"2")/norm(b,"2")
+
+```
+Observamos que la confición es alta y no necesariamente tenmos una buena estimación 
+
+## Otro ejemplo
+```{r}
+A <- matrix(runif(9),3,3)
+cond2 <- kappa(A, exact=TRUE, norm='2' )
+b <- c(5,6,9)
+x <- qr.solve(A,b)
+Am<-A
+Am[col(Am) == row(Am)] <- c(0.3489549,0.5533061,0.1408806)
+xhat <- qr.solve(Am,b)
+norm(A - Am,"2")/norm(A,"2")
+norm(A%*%xhat-b,"2")/norm(b,"2")
+```
+
+##Ejercicio2
+
+```{r}
+A <- diag(20)
+A[col(A) > row(A)] <- -1
+d <- c(rep(-1,19),1)
+sol <- qr.solve(A,d)
+Am <- A
+Am[20,20] <- 1.00001
+sol2 <- qr.solve(Am,d)
+
+solution <- cbind(sol,sol2)
+solution
+```

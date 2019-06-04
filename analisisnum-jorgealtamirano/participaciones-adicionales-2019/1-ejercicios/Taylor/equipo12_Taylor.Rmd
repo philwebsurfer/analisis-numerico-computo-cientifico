@@ -1,0 +1,125 @@
+---
+title: "Teorema de Taylor"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##EQUIPO 12: 
+
+Arantza Ivonne Pineda 
+Alexis Solis 
+Ana Luisa Masetto 
+
+
+###1. Definir el rango 
+```{r}
+valor_x<- vector(mode = 'numeric', length = 11)
+for (i in 1:11){
+  valor_x[i] <- -3.1+0.1*i
+  }
+```
+###2. Calcular estimaciones 
+
+
+####2.1 n=0
+```{r}
+#CÁLCULO FUNCIONES 
+
+funcion0_calculo <- function(x0){
+  valor = 1/x0^2
+}
+
+funcion_0 <- vector(mode = 'numeric', length = 11)
+for (i in 1:11){
+  funcion_0[i] <- funcion0_calculo(-2.5)
+    
+  }
+funcion_0
+
+```
+
+####2.2 n=1
+```{r}
+funcion_1<- vector(mode = 'numeric', length = 11)
+funcion1_calculo <- function(x){
+ valor = funcion0_calculo(-2.5)+(-2)*(-2.5^-3)*(x+2.5)
+}
+
+for(i in 1:11){
+  funcion_1[i] <- funcion1_calculo(valor_x[i])
+}
+
+funcion_1
+```
+
+####2.3 n=2
+
+```{r}
+funcion_2<- vector(mode = 'numeric', length = 11)
+funcion2_calculo <- function(x){
+ valor = funcion1_calculo(x)+((6)*(2.5^-4)*((x+2.5)^2))/2
+}
+
+for(i in 1:11){
+  funcion_2[i] <- funcion2_calculo(valor_x[i])
+}
+funcion_2
+```
+
+####2.4 n=3
+
+```{r}
+funcion_3<- vector(mode = 'numeric', length = 11)
+funcion3_calculo <- function(x){
+ valor = funcion2_calculo(x)+((-24)*(-2.55^-5)*(x+2.5)^3)/6
+}
+
+for(i in 1:11){
+  funcion_3[i] <- funcion3_calculo(valor_x[i])
+}
+funcion_3
+```
+
+####2.5 n=4
+
+```{r}
+funcion_4<- vector(mode = 'numeric', length = 11)
+funcion4_calculo <- function(x){
+ valor = funcion3_calculo(x)+((-24)*(-5)*(-2.5^-6)*(x+2.5)^4)/24
+}
+
+for(i in 1:11){
+  funcion_4[i] <- funcion4_calculo(valor_x[i])
+}
+funcion_4
+```
+
+###3. Gráfica 
+
+```{r}
+todo <- as.data.frame(cbind(valor_x, funcion_0, funcion_1, funcion_2, funcion_3, funcion_4))
+todo
+```
+
+```{r}
+library(ggplot2)
+
+#graficar resultados 
+g_funciones <- ggplot(todo, aes(x=valor_x, y=funcion_0))+geom_line(color="blue") + geom_line(aes(x=valor_x, y=funcion_1),color="green") + geom_line(aes(x=valor_x, y=funcion_2), color="red") +geom_line(aes(x=valor_x, y=funcion_3),color="orange")+geom_line(aes(x=valor_x, y=funcion_4), color="purple")
+
+g_funciones
+
+```
+
+
+
+
+
+
+
+
+
+

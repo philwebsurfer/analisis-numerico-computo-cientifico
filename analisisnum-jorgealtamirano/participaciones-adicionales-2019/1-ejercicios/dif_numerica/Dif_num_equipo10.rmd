@@ -1,0 +1,32 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Ejercicio 5
+#Equipo 10
+
+
+```{r}
+der <- function(h){
+  est <- (cos(2+h)-cos(2-h))/(2*h)
+  abs(est + sin(2))/sin(2)
+}
+```
+
+```{r}
+h <- 1*10^(seq(-1,-16,-1))
+
+e<-der(h)
+```
+
+```{r}
+plot(x = log(h) , y = log(e),type = "b", xlab = "log h", ylab = "log  ErrR")
+```

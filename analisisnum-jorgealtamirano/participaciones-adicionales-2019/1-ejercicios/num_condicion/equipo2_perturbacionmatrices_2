@@ -1,0 +1,140 @@
+---
+title: "Número de condición de matrices"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+
+### Matriz con condición del orden $10^0$
+```{r}
+# Matriz diagonal 
+
+A <- matrix(c(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1),4,4)
+A
+
+A_mod <- A - 0.001
+A_mod
+
+b <- (c(1.2, 3.4,7.8,10))
+b
+
+A_inv <- solve(A)
+
+x_estrella <- solve(A,b)
+x_estrella
+
+x_estrella_mod <- x_estrella - 0.001
+
+r <- A_mod * x_estrella_mod - b
+r
+
+norm(r,type="2") / norm(b,type = "2")
+
+```
+
+Condición de A calculada como $\|A\| * \|A^{-1}\|$
+
+```{r}
+norm(A,type = "2") * norm(A_inv, type = "2")
+```
+
+
+
+
+### Matriz con condición del orden $10^1$
+```{r}
+set.seed(73)
+
+B <- matrix(sample(20,16),4,4)
+B
+B_mod <- B - 0.001
+B_mod
+
+b <- (c(1.2, 3.4,7.8,10))
+b
+
+B_inv <- solve(B)
+
+x_estrella <- solve(B,b)
+x_estrella
+
+x_estrella_mod <- x_estrella - 0.001
+
+r <- B_mod * x_estrella_mod - b
+r
+
+norm(r,type="2") / norm(b,type = "2")
+```
+
+Condición de B calculada como $\|B\| * \|B^{-1}\|$
+
+```{r}
+norm(B,type = "2") * norm(B_inv, type = "2")
+```
+
+
+### Matriz con condición del orden $10^2$
+```{r}
+set.seed(607892)
+
+C <- matrix(rnorm(100,-5,100),5,5)
+C
+C_mod <- C - 0.001
+C_mod
+
+b <- (c(1.2, 3.4,7.8,10,1000))
+b
+
+C_inv <- solve(C)
+
+x_estrella <- solve(C,b)
+x_estrella
+
+x_estrella_mod <- x_estrella - 0.001
+
+r <- C_mod * x_estrella_mod - b
+r
+
+norm(r,type="2") / norm(b,type = "2")
+```
+
+Condición de C calculada como $\|C\| * \|C^{-1}\|$
+
+```{r}
+norm(C,type = "2") * norm(C_inv, type = "2")
+```
+
+
+### Matriz con condición del orden $10^5$
+```{r}
+
+
+D <- Matrix::Hilbert(5)
+D
+D_mod <- D - 0.001
+D_mod
+
+b <- c(1.2, 3.4,7.8,10,1000)
+b
+
+D_inv <- solve(D)
+
+x_estrella <- solve(D,b)
+x_estrella
+
+#x_estrella_mod <- x_estrella - 0.001
+
+#r <- D_mod * x_estrella_mod - b
+#r
+
+#norm(r,type="2") / norm(b,type = "2")
+```
+
+Condición de D calculada como $\|D\| * \|D^{-1}\|$
+
+```{r}
+norm(D,type = "2") * norm(D_inv, type = "2")
+```

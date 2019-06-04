@@ -1,0 +1,241 @@
+---
+title: "Comparación de tiempos:. Gaussiana Simple vs LU"
+output: html_document
+---
+
+#EQUIPO 12 
+
+Alexis Solis 130502 
+Arantza Ivonne Pineda 141194 
+Ana Luisa Masetto 183203
+
+#INTRODUCCIÓN 
+
+Comparar el algoritmo de Sustitución Gaussiana Siemple con el algoritmo de Factorización LU, con respecto al tiempo en el que tarda el código en correr. 
+
+```{r}
+library(dplyr)
+library(tibble)
+```
+
+
+## A. Tomar el tiempo del algoritmo de Sustitución Gaussiana Simple con sustitución hacia atrás para 1000 soluciones (b's)
+
+### a.1. Para comenzar a medir el tiempo del inciso a) 
+```{r}
+start_time <- Sys.time()
+```
+
+### a.2 Crear matriz A
+```{r}
+A<-matrix(ncol=3, nrow=3, c(1,2,1,2,2,3,-1,-3,0), byrow = TRUE)
+A
+```
+### a.3 Crear 1 solución para A 
+```{r}
+b<-matrix(ncol=1, nrow=3, c(0,3,2))
+b
+
+```
+
+### a.4 Crear 1000 soluciones para A
+
+```{r}
+b_cambiando<-b%*%seq(1,2000,2)
+dim(b_cambiando)
+```
+
+### a.5 Sustitución Gaussiana Simple 
+
+#### La matriz A convertida en una matriz triangular superior es la misma para todas las soluciones como se muestra a continuación 
+
+```{r}
+n<-nrow(A)
+for (l in 1:1000){
+  for(i in 1:2){
+    pivote_renglon<-A[i,i:n] 
+    for(j in (i+1):3){
+      multiplicador <- A[j,i]/A[i,i]
+      A[j,(i:n)]<-A[j,(i:n)]-(multiplicador*pivote_renglon)
+      b_cambiando[j,l]<-b_cambiando[j,l]-multiplicador*b_cambiando[i,l] 
+    }
+  }
+}
+
+A
+```
+
+
+#### Las b's se sobreescriben 
+```{r}
+dim(b_cambiando)
+mostrar_b_1 <- as.tibble(b_cambiando)
+mostrar_b_1
+```
+
+### a.6 Resolver el sistema de ecuaciones con la matriz triangular y los vectores b_cambiando
+
+#### Primero se calcula el valor de x3 para los 1000 vectores de soluciones 
+```{r}
+n<-nrow(A)
+
+for(l in 1:1000){
+  b_cambiando[n,l]<- b_cambiando[n,l]/A[n,n]
+}
+
+x3 <- as.tibble(b_cambiando)
+#En comparación con la tabla anterior el último renglón cambia 
+x3 
+```
+
+
+#### En esta sección se van calculando x2 y x3 para los 1000 vectores de soluciones
+```{r}
+for(l in 1:1000){
+  for(i in seq((n-1),1,-1)){
+    b_cambiando[i,l]<-(b_cambiando[i,l]-A[i,(i+1):n]%*%b_cambiando[(i+1):n,l])/A[i,i]
+  }
+  
+}
+x_s <- as.tibble(b_cambiando)
+#En comparación con las dos tablas anteriores, x3 (renglón 3) se mantiene igual que en la tabla anterior y x1 y x2 (renglón 1 y 2) cambian 
+x_s
+```
+### a.7 Terminar de medir el tiempo 
+
+```{r}
+end_time <- Sys.time()
+```
+
+### a.8 Tiempo total de procesamiento con esta versión 
+```{r}
+tiempo_1 <- end_time - start_time
+tiempo_1
+```
+
+
+## B. Algoritmo de Factorización LU para 1000 b's 
+
+
+### b.1. Para comenzar a medir el tiempo del inciso b) 
+```{r}
+start_time <- Sys.time()
+```
+
+### b.2 Crear matriz A
+```{r}
+A<-matrix(ncol=3, nrow=3, c(1,2,1,2,2,3,-1,-3,0), byrow = TRUE)
+A
+```
+### b.3 Crear 1 solución para A 
+```{r}
+b<-matrix(ncol=1, nrow=3, c(0,3,2))
+b
+
+```
+
+### b.4 Crear 1000 soluciones para A
+
+```{r}
+b_cambiando<-b%*%seq(1,2000,2)
+dim(b_cambiando)
+```
+
+### b.5 Algoritmo de Factorización LU 
+
+```{r}
+n<-nrow(A)
+for (k in 1:(n-1)) {
+    i <- (k+1):n
+    A[i,k]<-A[i,k]/A[k,k]
+    A[i,i]<-A[i,i]-A[i,k]*A[k,i]
+}
+A
+```
+
+### b.6 Obtener L y U
+
+```{r}
+L <- A*lower.tri(A)
+diag(L) <- 1
+L
+```
+
+```{r}
+U <- A*upper.tri(A, diag = TRUE)
+U
+```
+### b.7 Resolver hacia delante con L (obtener di)
+
+```{r}
+#inicializar
+n<-nrow(A)
+for(l in 1:1000){
+  b_cambiando[1,l]<-b_cambiando[1,l]/L[1,1]
+}
+```
+
+```{r}
+#obtener di 
+for(l in 1:1000){
+  for(i in 2:n){
+    b_cambiando[i,l]<-(b_cambiando[i,l]-L[i,1:(i-1)]%*%b_cambiando[1:(i-1),l])/L[i,i]
+    }
+}
+
+```
+```{r}
+d_s <- as.tibble(b_cambiando)
+d_s
+```
+
+### b.8 Sustitución hacia atrás (obtener valores de x con U)
+
+```{r}
+#Inicializar - obtenemos x3 
+n<-nrow(A)
+for(l in 1:1000){
+  b_cambiando[n,l]<-b_cambiando[n,l]/U[n,n]
+}
+
+x_3 <- as.tibble(b_cambiando)
+x_3
+```
+
+```{r}
+for (l in 1:1000){
+  for(i in seq((n-1),1,-1)){
+    b_cambiando[i,l]<-(b_cambiando[i,l]-U[i,(i+1):n]%*%b_cambiando[(i+1):n,l])/U[i,i]
+    }
+}
+
+```
+
+```{r}
+x_s <- as.tibble(b_cambiando)
+x_s
+```
+### b.9 Terminar de medir el tiempo 
+
+```{r}
+end_time <- Sys.time()
+```
+
+### b.10 Tiempo total de procesamiento con esta versión 
+```{r}
+tiempo_2 <- end_time - start_time
+tiempo_2
+```
+
+## Conclusión 
+
+En factorización LU es mucho más rápido resolver el sistema de ecuaciones que en Eliminación Gaussiana Simple y la diferencia de tiempos se muestra a continuación: 
+
+```{r}
+print("Tiempo para Eliminación Gaussiana Simple")
+tiempo_1
+print("Tiempo para Factorización LU ")
+tiempo_2
+print("Diferencia de tiempo")
+tiempo_1-tiempo_2
+```

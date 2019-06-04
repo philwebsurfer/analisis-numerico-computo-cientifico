@@ -1,0 +1,140 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+# Equipo 12 
+
+Alexis Solis 130502
+Arantza Ivonne Pineda 141194
+Ana Luisa Masetto 183203
+
+# Introducción 
+
+En este ejercicio se tienen tres algoritmos diferentes para multiplicación de matrices, el propósito es: tomar cada algoritmo (ijk, ikj y kij) y reducir su algoritmo orginal construido por 3 ciclos for() a solamente uno. 
+
+
+### Matrices a multiplicar
+
+```{r}
+A<-matrix(ncol=3,nrow=3, c(1,2,3,4,5,6,7,8,9), byrow=TRUE)
+B<-matrix(ncol=3,nrow=3, c(10,9,8,7,6,5,4,3,2), byrow=TRUE)
+print("Matriz A: ")
+A
+print("Matriz B: ")
+B
+```
+
+### CÓDIGOS ORIGINALES
+
+#### IJK 
+
+```{r}
+#i son renglones en A m
+#j son columnas en B n
+#K son columnas en A y renglones en B
+m<-nrow(A)
+n<-ncol(B)
+r<-ncol(A)
+C_original_1 <- matrix(ncol=3, nrow=3, c(0,0,0,0,0,0,0,0,0))
+ST_IJK_1 <- Sys.time()
+for (i in 1:m){
+  for(j in 1:n){
+    for(k in 1:r){
+      C_original_1[i,j]<- C_original_1[i,j]+A[i,k]%*%B[k,j]
+    }
+  }
+}
+ET_IJK_1 <- Sys.time()
+C_original_1
+
+
+TT_IJK_1<-ET_IJK_1-ST_IJK_1
+TT_IJK_1
+```
+
+
+#### IKJ 
+
+```{r}
+C_original_2 <- matrix(ncol=3, nrow=3, c(0,0,0,0,0,0,0,0,0))
+for (i in 1:m){
+  for(k in 1:r){
+    for(j in 1:n){
+      C_original_2[i,j]<- C_original_2[i,j]+A[i,k]%*%B[k,j]
+    }
+  }
+}
+C_original_2
+```
+
+####KIJ 
+
+```{r}
+C_original_3 <- matrix(ncol=3, nrow=3, c(0,0,0,0,0,0,0,0,0))
+for (k in 1:r){
+  for(i in 1:m){
+    for(j in 1:n){
+      C_original_3[i,j]<- C_original_3[i,j]+A[i,k]%*%B[k,j]
+    }
+  }
+}
+C_original_3
+```
+
+En esta primera parte se muestran los tres algoritmos con sus respectivos ciclos for() para ejercutar correctamente la multiplicación de la matriz A por la matriz B. 
+
+### CÓDIGOS REDUCIDOS
+
+#### IJK 
+```{r}
+C_1 <- matrix(ncol=3, nrow=3, c(0,0,0,0,0,0,0,0,0))
+ST_IJK_2 <- Sys.time()
+for(i in 1:m){
+  C_1[i,1:n]<-C_1[i,1:n]+A[i,1:r]%*%B[1:r,1:n]
+}
+ET_IJK_2 <- Sys.time()
+
+C_1
+TT_IJK_2 <- ET_IJK_2-ST_IJK_2 
+TT_IJK_2
+```
+
+#### IKJ
+
+```{r}
+C_2 <- matrix(ncol=3, nrow=3, c(0,0,0,0,0,0,0,0,0))
+for(i in 1:m){
+  C_2[i,1:n]<-C_2[i,1:n]+A[i,1:r]%*%B[1:r,1:n]
+}
+C_2
+```
+
+
+#### KIJ
+
+```{r}
+C_3 <- matrix(ncol=3, nrow=3, c(0,0,0,0,0,0,0,0,0))
+for (k in 1:r){
+  C_3[1:m,1:n]<- C_3[1:m,1:n]+A[1:m,k]*B[k,1:n]
+}
+C_3
+```
+
+
+Lo que se puede observar en esta sección del ejercicio es que los 3 algoritmos fueron reducidos y ahora utilizan únicamente un ciclo for(), lo cual hace más eficiente el cálculo de A x B. 
+
+Eso se puede corroborar con la función Sys.time() colocándola al principio y al final de cada algoritmo, por ejemplo, en el caso del primer algoritmo IJK el tiempo que tardo el código original y el tiempo que tardo el código reducido son: 
+
+```{r}
+#Original IJK (3 ciclos for)
+TT_IJK_1
+#Reducido IJK (1 ciclo for)
+TT_IJK_2
+```
+
+
+Por lo tanto, el código reducido ejecuta más rápido la multiplicación. 
+
+
+

@@ -1,0 +1,35 @@
+---
+title: "Eliminación Gaussiana (SAXPY)"
+output:
+  html_document:
+    df_print: paged
+---
+
+#EQUIPO 12
+
+Arantza Ivonne Pineda Sandoval 141194
+Alexis Solis 
+Ana Luisa Masetto Herrera 183203
+
+```{r}
+A<-matrix(ncol=4,nrow=4, c(3,0,0,0,2,1,0,0,1,5,1,0,7,9,8,4), byrow=TRUE)
+A
+sol<-matrix(ncol=1, nrow=4, c(-9,6,2,5))
+sol
+```
+
+```{r}
+n<-nrow(A)
+valor<-vector(length=4)
+for(i in 1:(n-1)){
+  escalar <- sol[i]/A[i,i]
+  valor[i]<-escalar
+  sol[(i+1):n]<-sol[(i+1):n]-A[(i+1):n,i]*escalar
+}
+
+escalar <- sol[n]/A[n,n]
+valor[n]<-escalar
+
+valor
+```
+

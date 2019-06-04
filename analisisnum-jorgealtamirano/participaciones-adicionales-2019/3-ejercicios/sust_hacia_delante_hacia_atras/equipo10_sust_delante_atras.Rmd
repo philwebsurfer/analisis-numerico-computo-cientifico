@@ -1,0 +1,53 @@
+---
+title: "04_Ejercicios_clase5"
+date: "28 de febrero de 2019"
+output: html_document
+---
+
+#Equipo 10
+
+
+#Solución de matriz hacía adelante y hacía atras.
+
+```{r}
+sol_atras <- function(A,b){
+  x <- matrix(rep(0,nrow(b)),nrow(b),1)
+  x[nrow(b),] <- b[nrow(b),1]/A[ncol(A),ncol(A)]
+  for (i in (nrow(b)-1):1) {
+    x[i, ]= (b[i,] - A[i,(i+1):ncol(A)] %*% x[(i+1):nrow(b),])/A[i,i]
+  }
+   x 
+}
+```
+
+```{r}
+sol_adelante <- function(A,b){
+  x <- matrix(rep(0,nrow(b)),nrow(b),1)
+  x[1,] <- b[1,1]/A[1,1]
+  for (i in 2:nrow(b)) {
+    x[i, ]= (b[i,] - A[i,1: (i-1) ] %*% x[1:(i-1),])/A[i,i]
+  }
+   x 
+}
+```
+
+
+```{r}
+A <- matrix(c(4,-1,2,3,0,-2,7,-4,0,0,6,5,0,0,0,3),nrow = 4, ncol = 4,byrow = TRUE)
+b <-matrix(c(20,-7,4,6),4,1)
+sol_atras(A,b)
+```
+
+
+```{r}
+A <- matrix(c(3,0,0,0,-1,1,0,0,3,-2,-1,0,1,-2,6,2),nrow = 4, ncol = 4,byrow = TRUE)
+b <-matrix(c(5,6,4,2),4,1)
+sol_adelante(A,b)
+```
+
+
+
+
+
+
+

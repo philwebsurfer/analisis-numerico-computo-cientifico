@@ -1,0 +1,54 @@
+---
+title: "Diferentes Versiones del Algoritimo de Multiplicación de Matrices"
+output: html_document
+---
+
+#Equipo 12 
+
+Alexis Solis 130502
+Arantza Ivonne Pineda 141194
+Ana Luisa Masetto 183203
+
+# Introducción 
+
+En este documento se presentan 4 preguntas relacionadas con multiplicación de matrices. 
+
+# Preguntas
+
+#### 1. ¿Qué tipo de acceso a los datos se realiza con el algoritmo anterior para las matrices A y B? 
+
+El algoritmo recorre la matriz A a lo largo del renglón (acceso por renglón) y recorre la matriz B por columna (acceso por columna). La multiplicación de estas dos matrices da como resultado una matriz C que se llena renglón a renglón. 
+
+#### 2. ¿Qué efecto tiene (considerando nuevamente el acceso a los datos de 1) permutar los ciclos para obtener el algoritmo "jik"? 
+
+Se recorre la matriz A por renglón y la matriz B por columna como en el caso anterior, sin embargo, la matriz resultante C se llena columna a columna. 
+
+#### 3. ¿Qué efecto tiene (considerando nuevamente el acceso a los datos de 1) permutar los ciclos para obtener el algoritmo "ikj"? y ¿Cómo se va construyendo la matriz C?   
+
+Cada elemento del renglón de A multiplica al renglón completo de la matriz B y una vez que se recorre toda la matriz B, la matriz C se llena por renglón y baja al siguiente. En este caso, la matriz A y la C bajan renglón al mismo tiempo. 
+
+Es decir, la matriz A tiene acceso por renglón, al igual que la matriz B y C. 
+
+#### 4. Si tuvieramos un cluster de computadoras con nodos, da propuestas de distribución de datos para el algoritmo de multiplicación de matrices para las formas "ijk", "jik" y "kij". 
+
+Caso 1) ijk 
+
+Se tienen mnodos que corresponden a los m renglones de la matriz A. En cada nodo se distribuye un renglón de A y la matriz completa de C. El resultado del nodo se almacena en cada renglón de la matriz C.
+
+
+Caso 2) jik 
+
+Se tienen n nodos equivalentes al número de columnas de la matriz B y en cada uno se distriuye una matriz completa A y una columna de la matriz B. El resultado de cada nodo es para cada columna de la matriz C. 
+
+
+Caso 3) kij 
+
+Se tienen r nodos, en cada nodo se distribuye una columna de A y un reglón de B, por lo tanto, cada nodo da una matrix resultante de mxn, donde m es el tamaño de la columna de A y n el del tamaño de la columna de B, cabe mencionar que r equivale al número de columnas en A. 
+
+El resultado se obtienen juntando y sumando las r matrices para llenar la matriz C. 
+
+Caso extra) ikj
+
+Se tienen m nodos que corresponden al número de renglones de A. En cada nodo se distribuye un renglón de la matriz A y lamatriz B completa. El resultadopor nodo es cada uno de los renglones de la matriz C.
+
+

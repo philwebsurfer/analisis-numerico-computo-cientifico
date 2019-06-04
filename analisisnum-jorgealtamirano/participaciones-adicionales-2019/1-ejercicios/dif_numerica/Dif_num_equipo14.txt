@@ -1,0 +1,19 @@
+library(ggplot2)
+library(dplyr)
+library(purrr)
+
+cos_prima<-function(h){
+  f<-(cos(2+h)-cos(2-h))/(2*h)
+  return(f)
+}
+
+h <- map(1:16,~10^(-.)) %>% unlist()
+
+
+datos<-data.frame(valores=h, coseno=cos_prima(h), derivada_cos = -sin(2) ) %>% 
+  mutate(error_abs = abs(-sin(2) - coseno), error_rtv = abs((-sin(2) - coseno)/-sin(2)),
+         log_e=log(error_rtv), log_h=log(h)) 
+
+datos %>% 
+  ggplot(aes(x=log_h, y=log_e)) +
+  geom_path()

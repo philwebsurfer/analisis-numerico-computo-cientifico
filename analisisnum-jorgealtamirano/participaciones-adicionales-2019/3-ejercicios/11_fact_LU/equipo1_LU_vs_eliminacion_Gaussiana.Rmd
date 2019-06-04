@@ -1,0 +1,58 @@
+---
+title: "Clase 9:Ejercicio3.a"
+author: "Equipo 1"
+date: "3/13/2019"
+output: html_document
+---
+Cargamso la función de eliminación Gaussiana
+
+```{r}
+gauss_elim<-function(A,b){
+  # Eliminacion Gaussiana
+  n1<-ncol(A)
+  A<-cbind(A,b)
+  m<-nrow(A)
+  n<-ncol(A)
+  for(i in 1:(m-1)){
+    A[i,i:n]<-A[i,i:n]/A[i,i]
+    A[(i+1):m,(i+1):n]<-A[(i+1):m,(i+1):n]-A[(i+1):m,i]%*%t(A[i,(i+1):n])
+    A[(i+1):m,i]<-rep(0,m-i)
+  }
+  A[m,m:n]<-A[m,m:n]/A[m,m]
+  b<-as.matrix(A[,(n1+1):n])
+  A<-A[,1:n1]
+  
+  # Sustituci??n hacia atr??s
+  n<-ncol(A)
+  n1<-ncol(b)
+  X<-matrix(rep(NA,m*n1),nrow=m)
+  
+  X[m,]<-b[m,]
+  for(i in rev(1:(m-1))){
+    X[i,]<-b[i,]-A[i,(i+1):n]%*%X[(i+1):m,]
+  }
+  return(X)
+}
+
+```
+
+Corremos las simulaciones de tamaño de 1 a 1000:
+
+```{r}
+options(warn=-1) 
+A<-matrix(c(1,2,1,2,2,3,-1,-3,0),nrow=3,byrow=T)
+k <- rep(0,1000)
+for(i in 1:1000){
+  
+k[i] <-system.time(
+  for(j in 1:i){
+    b <- runif(3,-20,20)
+    gauss_elim(A,b)
+  }
+
+)   
+  
+}
+k
+```
+

@@ -1,0 +1,63 @@
+---
+title: "Eliminación Gaussiana"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+Resolver por sustitución hacia delante en su versión saxpy por bloques (2x2) el sistema:
+
+```{r}
+# Matriz cuadrada
+
+A <- matrix(c(3,0,0,0,2,1,0,0,1,5,1,0,7,9,8,4),4,4, byrow = TRUE)
+A
+
+B <- matrix(c(-9,6,2,5,12,-1,0,1),nrow = 4, ncol = 2, byrow = FALSE)
+B
+
+#Matrix::isTriangular(A)
+
+saxpy_bloque <- function(A,B,n=1){
+  # A Matriz
+  # B Vector o Matriz de resultados
+  # n Tamaño de bloque
+  m <- length(A[1,]) %% n
+  N <- length(A[1,]) / n
+  if (Matrix::isTriangular(A) & (m==0)){
+   for (j in 1:N){
+     B[(j*n-n+1):(n*j),1:n] = solve(A[(j*n-n+1):(n*j),(j*n-n+1):(n*j)], B[(j*n-n+1):(n*j),1:n])
+     for (i in (j+1):N){
+       if ((j+1)<=N){
+       B[(i*n-n+1):(n*i),1:n] = B[(i*n-n+1):(n*i),1:n] - ( A[(i*n-n+1):(n*i),(j*n-n+1):(n*j)] %*% B[(j*n-n+1):(n*j),1:n] )
+       }
+     }
+   } 
+  } else {
+    print("La matrix no es triangular inf y/o el tamaño no es adecuado")
+  }
+  B
+}
+
+```
+
+```{r}
+saxpy_bloque(A,B,n=2)
+```
+
+Resolver con sustitución hacia adelante en su version saxpy el sistema:
+
+```{r}
+A <- matrix(c(3,0,0,0,2,1,0,0,1,5,1,0,7,9,8,4),4,4, byrow = TRUE)
+A
+
+B <- matrix(c(-9,6,2,5),nrow = 4, ncol = 1, byrow = FALSE)
+B
+```
+
+
+```{r}
+saxpy_bloque(A,B,n=1)
+```

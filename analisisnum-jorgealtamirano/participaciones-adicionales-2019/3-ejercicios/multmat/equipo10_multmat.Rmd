@@ -1,0 +1,52 @@
+---
+title: "04_Ejercicios_clase5"
+date: "28 de febrero de 2019"
+output: html_document
+---
+
+#Equipo 10
+
+
+###Definimos las matrices.
+```{r}
+set.seed(7167)
+A<-matrix(rnorm(7* 5),7,5)
+B<-matrix(runif(5* 8),5,8)
+C<-matrix(rep(0,7*8),7,8)
+# m = 7 , n = 8, r =  5
+m <- 7
+n <- 8
+r <- 5
+```
+
+### IJK
+```{r}
+for (i in 1:m) {
+  C[i,] <- A[i,]%*%B
+}
+C
+``` 
+
+### KIJ
+
+```{r}
+C<-matrix(rep(0,7*8),7,8)
+for (k in 1:r) {
+    C <- C + A[,k]%*%t(B[k,])
+}
+C
+```
+
+### IKJ
+```{r}
+C<-matrix(rep(0,7*8),7,8)
+for (i in 1:m) {
+    C[i,] <- A[i,]%*%B
+}
+C
+```
+
+### Resultado real 
+```{r}
+A%*%B
+```

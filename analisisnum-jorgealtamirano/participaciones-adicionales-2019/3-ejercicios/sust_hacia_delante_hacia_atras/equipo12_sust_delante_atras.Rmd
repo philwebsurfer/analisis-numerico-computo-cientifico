@@ -1,0 +1,75 @@
+---
+title: "Eliminacion Gaussiana"
+output: html_document
+---
+#Equipo 12 
+
+Alexis Solis 130502
+Arantza Ivonne Pineda 141194
+Ana Luisa Masetto 183203
+
+# Introducción 
+
+En este documento se encuentran los dos ejercicios de eliminación gaussiana resueltos con R. Las matrices son las mismas que se presentan en el documento previamente entregada a mano. 
+
+## Eliminación gaussiana hacia atrás 
+
+```{r}
+A<-matrix(nrow=4, ncol=4, c(4,-1,2,3,0,-2,7,-4,0,0,6,5,0,0,0,3), byrow=TRUE)
+b<-matrix(nrow=4, ncol=1, c(20,-7,4,6), byrow=TRUE)
+print("Matriz A")
+A
+print("Matriz b")
+b
+```
+
+```{r}
+#inicializar
+n<-4
+b[n]<-b[n]/A[n,n]
+```
+
+```{r}
+for(i in seq((n-1),1,-1)){
+  b[i]<-(b[i]-A[i,(i+1):n]%*%b[(i+1):n])/A[i,i]
+}
+```
+
+```{r}
+#RESULTADO 
+b
+```
+
+El resultado anterior se puede comparar con el ejercicio a mano que se envió. 
+
+
+## Eliminación gaussiana hacia adelante 
+
+```{r}
+A<-matrix(nrow=4, ncol=4, c(3,0,0,0,-1,1,0,0,3,-2,-1,0,1,-2,6,2), byrow=TRUE)
+b<-matrix(nrow=4, ncol=1, c(5,6,4,2), byrow=TRUE)
+print("Matriz A")
+A
+print("Matriz b")
+b
+```
+
+```{r}
+#inicializar
+n<-4
+b[1]<-b[1]/A[1,1]
+```
+
+```{r}
+for(i in 2:n){
+  b[i]<-(b[i]-A[i,1:(i-1)]%*%b[1:(i-1)])/A[i,i]
+}
+```
+
+```{r}
+#RESULTADO 
+b
+```
+
+El resultado anterior se puede comparar con el ejercicio a mano que se envió. 
+

@@ -1,0 +1,63 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+#EQUIPO 12 
+
+Alexis Solis
+Ivonne Pineda 
+Ana Luisa Masetto 
+
+##ESTIMACIONES DE LA FUNCIÓN
+
+```{r}
+#valores originales
+f_x0 <- exp(-0^2)
+f_x1 <- exp(-1^2)
+h<-1
+valores_n<-10000
+estimaciones <- vector(mode = 'numeric', length = (valores_n-100))
+for(i in 100:valores_n){
+  
+  #Valores de x
+  valor_x<- vector(mode = 'numeric', length = i)
+  valor_x[1]<-0
+  for (j in 2:i){
+    valor_x[j] <- valor_x[j-1] + 1/i
+  }
+  
+  #Funcion original 
+  funcion_x<- vector(mode = 'numeric', length = i)
+  
+  for (k in 1:i){
+    funcion_x[k]<-exp(-valor_x[k]^2)
+  }
+  #funcion evaluada en cda punto 
+  #funcion_x
+  #trapecio (X*)
+  estimaciones[i]<- (h/(2*i))*(f_x0+f_x1+2*sum(funcion_x[2:(i-1)]))
+}
+
+
+#Sacar error 
+estimaciones_funcion <- data.frame(x=estimaciones[100:10000])
+
+valor_num <- 0.746824
+valor_real <- vector(mode = 'numeric', length = 9900)
+for (i in 1:9901){
+  valor_real[i] <- valor_num
+    
+}
+
+#agrupar todo
+valores_n_nuevo <- seq(100,10000,1)
+resumen <- data.frame(cbind(valor_real, estimaciones_funcion,valores_n_nuevo))
+library(tidyverse)
+a_graficar <- resumen %>% mutate(diferencia = abs(resumen$valor_real-resumen$x)/abs(resumen$x))
+
+ggplot(a_graficar) + geom_line(aes(x=valores_n_nuevo, y=diferencia))
+```
+
+
+

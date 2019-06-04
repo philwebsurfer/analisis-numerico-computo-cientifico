@@ -1,0 +1,41 @@
+---
+title: "Eliminación Gaussiana"
+author: "Soledad, Iker, Luis"
+date: "March 6th, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+Outer Product Right looking
+```{r}
+set.seed(5737)
+A_2=matrix(sample(7,25, replace = TRUE),5,5)
+A_2
+b_2=matrix(nrow=5,ncol=1, c(6,3,2,8,4),byrow=TRUE)
+
+outer_product <- function(A,b){
+  n <- length(A[,1])
+  for (k in 1 : (n-1)){
+    #i = k+1:n
+    l_k = t(t(A[(k+1):n,k] / A[k,k]))
+    A[(k+1):n,(k+1):n] = A[(k+1):n,(k+1):n] - l_k %*% A[k,(k+1):n]
+    b[(k+1):n] = b[(k+1):n] - b[k] * l_k
+  }
+  A <- Matrix::triu(A)
+  solve(A,b)
+}
+```
+
+```{r}
+outer_product(A_2,b_2)
+```
+
+Comprobación con función de R:
+```{r}
+solve(A_2,b_2)
+```
+
