@@ -7,6 +7,8 @@ import numpy as np
 from time import time
 
 df = pd.DataFrame(columns=['BLAS', 'Tamaño', 'Operación', 'Iteraciones', 'Tiempo'])
+eng = np.__config__.blas_opt_info['libraries'][0]
+
 
 np.random.seed(0)
 
@@ -17,10 +19,10 @@ for i in range(4, 14):
     N = 5
     t = time()
     for i in range(N):
-        np.dot(A, B)
+        np.multiply(A, B)
     delta = time() - t
     del A, B
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
                'Tamaño': size, 
                'Operación': "Producto Punto de Matrices", 
                'Iteraciones': N,
@@ -28,7 +30,7 @@ for i in range(4, 14):
               ignore_index=True)
 
 for i in range(6, 12):
-    # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
+    # Producto Punto de matriz 20 veces (N) para sacar un promedio.
     size = 2**i
     A, B = np.random.random((size, size)), np.random.random((size, size))
     N = 5
@@ -37,7 +39,7 @@ for i in range(6, 12):
         np.dot(A, B)
     delta = time() - t
     del A, B
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
                'Tamaño': size, 
                'Operación': "Producto Punto de Matrices", 
                'Iteraciones': N,
@@ -53,7 +55,7 @@ for i in range(8, 14):
     for i in range(N):
         np.dot(C, D)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
                'Tamaño': (size*128), 
                'Operación': "Producto Punto de 2 Vectores", 
                'Iteraciones': N,
@@ -70,7 +72,7 @@ for i in range(6, 12):
     for i in range(N):
         np.linalg.svd(E, full_matrices = False)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
            'Tamaño': (size),
            'Operación': "SVD", 
            'Iteraciones': N,
@@ -88,7 +90,7 @@ for i in range(6, 12):
     for i in range(N):
         np.linalg.cholesky(F)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
        'Tamaño': size/2,
        'Operación': "Cholesky", 
        'Iteraciones': N,
@@ -105,7 +107,7 @@ for i in range(6, 12):
     for i in range(N):
         np.linalg.eig(G)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
        'Tamaño': size/2,
        'Operación': "Eigen", 
        'Iteraciones': N,
@@ -113,23 +115,6 @@ for i in range(6, 12):
       ignore_index=True)
     del G
 
-for i in range(2, 16):
-    # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
-    size = 2**i
-    A, B = np.random.random((size, size)), np.random.random((size, size))
-    N = 5
-    t = time()
-    for i in range(N):
-        np.multiply(A, B)
-    delta = time() - t
-    del A, B
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
-               'Tamaño': size, 
-               'Operación': "Producto de Matrices", 
-               'Iteraciones': N,
-               'Tiempo': delta/N}, 
-              ignore_index=True)
-
-filename = "compare.%s.csv"%(np.__config__.blas_opt_info['libraries'][0])
+filename = "compare.%s.csv"%(eng)
 print("Guardando archivo en " + filename)
 df.to_csv(filename, encoding="utf-8", index=False)

@@ -3,25 +3,28 @@
 # @description: Ejecuta pruebas de benchmarking en punto flotante, basado en numpy con fines comparativos.
 
 import pandas as pd
-import numpy as np
-import cudamat as cm
+#import numpy as np
+import cupy as cp
 from time import time
 
 df = pd.DataFrame(columns=['BLAS', 'Tamaño', 'Operación', 'Iteraciones', 'Tiempo'])
 
-np.random.seed(0)
+cp.random.seed(0)
+
+eng = cp.cuda.cublas.getVersion(cp.cuda.get_cublas_handle()) / 1000
+eng = "cupy+cublas+%f"%eng
 
 for i in range(4, 14):
     # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
     size = 2**i
-    A, B = np.random.random((size, size)), np.random.random((size, size))
+    A, B = cp.random.random((size, size)), cp.random.random((size, size))
     N = 5
     t = time()
     for i in range(N):
-        np.dot(A, B)
+        cp.multiply(A, B)
     delta = time() - t
     del A, B
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
                'Tamaño': size, 
                'Operación': "Producto Punto de Matrices", 
                'Iteraciones': N,
@@ -29,16 +32,16 @@ for i in range(4, 14):
               ignore_index=True)
 
 for i in range(6, 12):
-    # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
+    # Producto Punto de matriz 20 veces (N) para sacar un promedio.
     size = 2**i
-    A, B = np.random.random((size, size)), np.random.random((size, size))
+    A, B = cp.random.random((size, size)), cp.random.random((size, size))
     N = 5
     t = time()
     for i in range(N):
-        np.dot(A, B)
+        cp.dot(A, B)
     delta = time() - t
     del A, B
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
                'Tamaño': size, 
                'Operación': "Producto Punto de Matrices", 
                'Iteraciones': N,
@@ -49,12 +52,12 @@ for i in range(8, 14):
     # Multiplicacion de vectores 5000 Veces para sacar un promedio.
     size = 2**i
     N = 2500
-    C, D = np.random.random((size * 128,)), np.random.random((size * 128,))
+    C, D = cp.random.random((size * 128,)), cp.random.random((size * 128,))
     t = time()
     for i in range(N):
-        np.dot(C, D)
+        cp.dot(C, D)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
                'Tamaño': (size*128), 
                'Operación': "Producto Punto de 2 Vectores", 
                'Iteraciones': N,
@@ -65,13 +68,13 @@ for i in range(8, 14):
 for i in range(6, 12):
     # SVD: promedio de 3.
     size = 2**i
-    E = np.random.random((int(size), int(size/2)))
+    E = cp.random.random((int(size), int(size/2)))
     N = 5
     t = time()
     for i in range(N):
-        np.linalg.svd(E, full_matrices = False)
+        cp.linalg.svd(E, full_matrices = False)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
            'Tamaño': (size),
            'Operación': "SVD", 
            'Iteraciones': N,
@@ -82,14 +85,14 @@ for i in range(6, 12):
 for i in range(6, 12):
     # Cholesky: promedio de 3.
     size = 2**i
-    F = np.random.random((int(size / 2), int(size / 2)))
-    F = np.dot(F, F.T)
+    F = cp.random.random((int(size / 2), int(size / 2)))
+    F = cp.dot(F, F.T)
     N = 5
     t = time()
     for i in range(N):
-        np.linalg.cholesky(F)
+        cp.linalg.cholesky(F)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
        'Tamaño': size/2,
        'Operación': "Cholesky", 
        'Iteraciones': N,
@@ -101,12 +104,13 @@ for i in range(6, 12):
     # Valores y vectores propios: promedio de 3.
     size = 2**i
     t = time()
-    G = np.random.random((int(size / 2), int(size / 2)))
+    G = cp.random.random((int(size / 2), int(size / 2)))
     N = 5
     for i in range(N):
-        np.linalg.eig(G)
+        cp.linalg.eigh(G)
+        cp.linalg.eigvalsh(G)
     delta = time() - t
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+    df = df.append({'BLAS': eng,
        'Tamaño': size/2,
        'Operación': "Eigen", 
        'Iteraciones': N,
@@ -114,23 +118,6 @@ for i in range(6, 12):
       ignore_index=True)
     del G
 
-for i in range(2, 16):
-    # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
-    size = 2**i
-    A, B = np.random.random((size, size)), np.random.random((size, size))
-    N = 5
-    t = time()
-    for i in range(N):
-        np.multiply(A, B)
-    delta = time() - t
-    del A, B
-    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
-               'Tamaño': size, 
-               'Operación': "Producto de Matrices", 
-               'Iteraciones': N,
-               'Tiempo': delta/N}, 
-              ignore_index=True)
-
-filename = "compare.%s.csv"%(np.__config__.blas_opt_info['libraries'][0])
+filename = "compare.%s.csv"%(eng)
 print("Guardando archivo en " + filename)
 df.to_csv(filename, encoding="utf-8", index=False)
