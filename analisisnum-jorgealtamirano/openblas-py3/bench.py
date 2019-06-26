@@ -10,6 +10,23 @@ df = pd.DataFrame(columns=['BLAS', 'Tamaño', 'Operación', 'Iteraciones', 'Tiem
 
 np.random.seed(0)
 
+for i in range(4, 14):
+    # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
+    size = 2**i
+    A, B = np.random.random((size, size)), np.random.random((size, size))
+    N = 5
+    t = time()
+    for i in range(N):
+        np.dot(A, B)
+    delta = time() - t
+    del A, B
+    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+               'Tamaño': size, 
+               'Operación': "Producto Punto de Matrices", 
+               'Iteraciones': N,
+               'Tiempo': delta/N}, 
+              ignore_index=True)
+
 for i in range(6, 12):
     # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
     size = 2**i
@@ -95,6 +112,24 @@ for i in range(6, 12):
        'Tiempo': delta/N}, 
       ignore_index=True)
     del G
+
+for i in range(2, 16):
+    # Multiplicacion de matriz 20 veces (N) para sacar un promedio.
+    size = 2**i
+    A, B = np.random.random((size, size)), np.random.random((size, size))
+    N = 5
+    t = time()
+    for i in range(N):
+        np.multiply(A, B)
+    delta = time() - t
+    del A, B
+    df = df.append({'BLAS': np.__config__.blas_opt_info['libraries'][0],
+               'Tamaño': size, 
+               'Operación': "Producto de Matrices", 
+               'Iteraciones': N,
+               'Tiempo': delta/N}, 
+              ignore_index=True)
+
 filename = "compare.%s.csv"%(np.__config__.blas_opt_info['libraries'][0])
 print("Guardando archivo en " + filename)
 df.to_csv(filename, encoding="utf-8", index=False)
