@@ -24,7 +24,7 @@ for i in range(4, 14):
     del A, B
     df = df.append({'BLAS': eng,
                'Tamaño': size, 
-               'Operación': "Producto Punto de Matrices", 
+               'Operación': "Producto de Matrices", 
                'Iteraciones': N,
                'Tiempo': delta/N}, 
               ignore_index=True)
